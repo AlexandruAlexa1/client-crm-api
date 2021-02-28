@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+
+<h1>Welcome AA</h1>
+
+<div th:each="customer: ${customers}">
+	<p th:text="${customer.firstName}"></p>
+</div>
+
+</body>
+</html>
