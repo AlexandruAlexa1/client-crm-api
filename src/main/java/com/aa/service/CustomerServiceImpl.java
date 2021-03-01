@@ -58,8 +58,18 @@ public class CustomerServiceImpl implements CustomerService {
 
 	@Override
 	public Customer getCustomer(int id) {
-		// TODO Auto-generated method stub
-		return null;
+		
+		// make REST call
+		ResponseEntity<Customer> responseEntity = restTemplate.exchange(
+																		url + "/" + id, 
+																		HttpMethod.GET,
+																		new HttpEntity<>(createHeaders("aa", "0000")),
+																		Customer.class
+																		);
+		
+		Customer customer = responseEntity.getBody();
+		
+		return customer;
 	}
 
 	@Override
