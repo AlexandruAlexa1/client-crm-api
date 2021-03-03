@@ -47,7 +47,7 @@ public class CustomerServiceImpl implements CustomerService {
 		ResponseEntity<List<Customer>> responseEntity = restTemplate.exchange(
 																				url, 
 																				HttpMethod.GET,
-																				new HttpEntity<>(createHeaders("aa", "0000")),
+																				new HttpEntity<Customer>(createHeaders("aa", "0000")),
 																				new ParameterizedTypeReference<List<Customer>>() {}
 																			  );
 		
@@ -63,7 +63,7 @@ public class CustomerServiceImpl implements CustomerService {
 		ResponseEntity<Customer> responseEntity = restTemplate.exchange(
 																		url + "/" + id, 
 																		HttpMethod.GET,
-																		new HttpEntity<>(createHeaders("aa", "0000")),
+																		new HttpEntity<Customer>(createHeaders("aa", "0000")),
 																		Customer.class
 																		);
 		
@@ -74,13 +74,28 @@ public class CustomerServiceImpl implements CustomerService {
 
 	@Override
 	public void saveCustomer(Customer customer) {
-		// TODO Auto-generated method stub
+		
+		int id = customer.getId();
+		
+		if (id == 0) {
+			// add customer
+			restTemplate.exchange(url, HttpMethod.POST, new HttpEntity<Customer>(customer, createHeaders("alexa", "0000")), Customer.class);
+		} else {
+			// update customer
+			restTemplate.exchange(url, HttpMethod.PUT, new HttpEntity<Customer>(customer, createHeaders("alexa", "0000")), Customer.class);
+		}
 
 	}
 
 	@Override
 	public void deleteCustomer(int id) {
-		// TODO Auto-generated method stub
+		
+		/*
+		restTemplate.exchange(url + "/" + id, HttpMethod.DELETE, new HttpEntity<>(createHeaders("alexandru", "0000")), Customer.class);
+		*/
+		
+		// make REST call
+		restTemplate.delete(url + "/" + id);
 
 	}
 
