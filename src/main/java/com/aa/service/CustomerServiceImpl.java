@@ -90,13 +90,7 @@ public class CustomerServiceImpl implements CustomerService {
 	@Override
 	public void deleteCustomer(int id) {
 		
-		/*
-		restTemplate.exchange(url + "/" + id, HttpMethod.DELETE, new HttpEntity<>(createHeaders("alexandru", "0000")), Customer.class);
-		*/
-		
-		// make REST call
-		restTemplate.delete(url + "/" + id);
-
+		restTemplate.exchange(url + "/" + id, HttpMethod.DELETE, new HttpEntity<>(createHeaders("alexandru", "0000")), Void.class);
 	}
 
 }
