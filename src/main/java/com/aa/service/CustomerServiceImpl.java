@@ -51,7 +51,7 @@ public class CustomerServiceImpl implements CustomerService {
 																				new HttpEntity<Customer>(createHeaders("aa", "0000")),
 																				new ParameterizedTypeReference<List<Customer>>() {}
 																		  	 );
-		
+		// get the list of customers from response
 		List<Customer> customers = responseEntity.getBody();
 		
 		return customers;
