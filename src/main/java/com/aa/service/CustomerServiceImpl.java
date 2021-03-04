@@ -44,12 +44,13 @@ public class CustomerServiceImpl implements CustomerService {
 	@Override
 	public List<Customer> getCustomers() {
 
+		// make REST call
 		ResponseEntity<List<Customer>> responseEntity = restTemplate.exchange(
 																				url, 
 																				HttpMethod.GET,
 																				new HttpEntity<Customer>(createHeaders("aa", "0000")),
 																				new ParameterizedTypeReference<List<Customer>>() {}
-																			  );
+																		  	 );
 		
 		List<Customer> customers = responseEntity.getBody();
 		
@@ -66,7 +67,6 @@ public class CustomerServiceImpl implements CustomerService {
 																		new HttpEntity<Customer>(createHeaders("aa", "0000")),
 																		Customer.class
 																		);
-		
 		Customer customer = responseEntity.getBody();
 		
 		return customer;
@@ -77,6 +77,7 @@ public class CustomerServiceImpl implements CustomerService {
 		
 		int id = customer.getId();
 		
+		// make REST call
 		if (id == 0) {
 			// add customer
 			restTemplate.exchange(url, HttpMethod.POST, new HttpEntity<Customer>(customer, createHeaders("alexa", "0000")), Customer.class);
@@ -90,6 +91,7 @@ public class CustomerServiceImpl implements CustomerService {
 	@Override
 	public void deleteCustomer(int id) {
 		
+		// make REST call
 		restTemplate.exchange(url + "/" + id, HttpMethod.DELETE, new HttpEntity<>(createHeaders("alexandru", "0000")), Void.class);
 	}
 
