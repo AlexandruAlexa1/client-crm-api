@@ -23,8 +23,10 @@ public class CustomerController {
 	@GetMapping("/list")
 	public String listCustomers(Model model) {
 		
+		// get customers from the service
 		List<Customer> theCustomers = customerService.getCustomers();
 		
+		// add the customers to the model
 		model.addAttribute("customers", theCustomers);
 		
 		return "list-customers";
@@ -33,7 +35,9 @@ public class CustomerController {
 	@GetMapping("/showFormForAdd")
 	public String showFormForAdd(Model model) {
 		
+		// create model attribute to bind form data
 		Customer customer = new Customer();
+		
 		model.addAttribute("customer", customer);
 		
 		return "customer-form";
@@ -51,16 +55,20 @@ public class CustomerController {
 	@GetMapping("/showFormForUpdate")
 	public String showFormForUpdate(@RequestParam("customerId") int id, Model model) {
 		
+		// get the customer from our service
 		Customer customer = customerService.getCustomer(id);
 		
+		// set customer as a model attribute to pre-populate the form
 		model.addAttribute("customer", customer);
 		
+		// send over to our form
 		return "customer-form";
 	}
 	
 	@GetMapping("/delete")
 	public String delete(@RequestParam("customerId") int id) {
 		
+		// delete the customer
 		customerService.deleteCustomer(id);
 		
 		return "redirect:/customers/list";
