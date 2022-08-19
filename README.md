@@ -9,6 +9,6 @@ Tehnologies used:
   Spring Data,
   AOP,
 	MySQL DB,
-  Thyneleaf
+  Thymeleaf
  	and
 	Bootstrap
