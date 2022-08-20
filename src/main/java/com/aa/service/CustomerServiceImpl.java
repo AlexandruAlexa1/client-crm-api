@@ -22,7 +22,7 @@ public class CustomerServiceImpl implements CustomerService {
 	@Autowired
 	private RestTemplate restTemplate;
 
-	@Value("${UrlAPI}")
+	@Value("${api.url}")
 	String url;
 
 	public HttpHeaders createHeaders(String username, String password) {
@@ -66,7 +66,7 @@ public class CustomerServiceImpl implements CustomerService {
 
 	@Override
 	public void save(Customer customer) {
-		boolean isNewMode = customer.getId() == 0;
+		boolean isNewMode = customer.getId() == null;
 		
 		if (isNewMode) {
 			restTemplate.exchange(url, HttpMethod.POST, new HttpEntity<Customer>(customer, createHeaders("user3", "0000")), Customer.class);
