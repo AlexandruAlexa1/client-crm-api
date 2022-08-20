@@ -48,7 +48,7 @@ public class CustomerServiceImpl implements CustomerService {
 		ResponseEntity<List<Customer>> responseEntity = restTemplate.exchange(
 																				url, 
 																				HttpMethod.GET,
-																				new HttpEntity<Customer>(createHeaders("aa", "0000")),
+																				new HttpEntity<Customer>(createHeaders("user1", "0000")),
 																				new ParameterizedTypeReference<List<Customer>>() {}
 																		  	 );
 		// get the list of customers from response
@@ -64,7 +64,7 @@ public class CustomerServiceImpl implements CustomerService {
 		ResponseEntity<Customer> responseEntity = restTemplate.exchange(
 																		url + "/" + id, 
 																		HttpMethod.GET,
-																		new HttpEntity<Customer>(createHeaders("aa", "0000")),
+																		new HttpEntity<Customer>(createHeaders("user1", "0000")),
 																		Customer.class
 																		);
 		Customer customer = responseEntity.getBody();
@@ -80,10 +80,10 @@ public class CustomerServiceImpl implements CustomerService {
 		// make REST call
 		if (id == 0) {
 			// add customer
-			restTemplate.exchange(url, HttpMethod.POST, new HttpEntity<Customer>(customer, createHeaders("alexa", "0000")), Customer.class);
+			restTemplate.exchange(url, HttpMethod.POST, new HttpEntity<Customer>(customer, createHeaders("user3", "0000")), Customer.class);
 		} else {
 			// update customer
-			restTemplate.exchange(url, HttpMethod.PUT, new HttpEntity<Customer>(customer, createHeaders("alexa", "0000")), Customer.class);
+			restTemplate.exchange(url, HttpMethod.PUT, new HttpEntity<Customer>(customer, createHeaders("user3", "0000")), Customer.class);
 		}
 
 	}
@@ -92,7 +92,7 @@ public class CustomerServiceImpl implements CustomerService {
 	public void deleteCustomer(int id) {
 		
 		// make REST call
-		restTemplate.exchange(url + "/" + id, HttpMethod.DELETE, new HttpEntity<>(createHeaders("alexandru", "0000")), Void.class);
+		restTemplate.exchange(url + "/" + id, HttpMethod.DELETE, new HttpEntity<>(createHeaders("user3", "0000")), Void.class);
 	}
 
 }
