@@ -6,11 +6,11 @@ import com.aa.model.Customer;
 
 public interface CustomerService {
 
-	public List<Customer> getCustomers();
+	public List<Customer> listAll();
 	
-	public Customer getCustomer(int id);
+	public Customer get(Integer id);
 	
-	public void saveCustomer(Customer customer);
+	public void save(Customer customer);
 	
-	public void deleteCustomer(int id);
+	public void delete(Integer id);
 }

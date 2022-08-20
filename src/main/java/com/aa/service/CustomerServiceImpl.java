@@ -22,14 +22,11 @@ public class CustomerServiceImpl implements CustomerService {
 	@Autowired
 	private RestTemplate restTemplate;
 
-	@Value("${api-1}")
+	@Value("${UrlAPI}")
 	String url;
 
 	public HttpHeaders createHeaders(String username, String password) {
 		return new HttpHeaders() {
-			/**
-			 * 
-			 */
 			private static final long serialVersionUID = 1L;
 
 			{
@@ -42,56 +39,44 @@ public class CustomerServiceImpl implements CustomerService {
 	}
 
 	@Override
-	public List<Customer> getCustomers() {
-
-		// make REST call
+	public List<Customer> listAll() {
 		ResponseEntity<List<Customer>> responseEntity = restTemplate.exchange(
-																				url, 
-																				HttpMethod.GET,
-																				new HttpEntity<Customer>(createHeaders("user1", "0000")),
-																				new ParameterizedTypeReference<List<Customer>>() {}
-																		  	 );
-		// get the list of customers from response
-		List<Customer> customers = responseEntity.getBody();
+														url, 
+														HttpMethod.GET,
+														new HttpEntity<Customer>(createHeaders("user1", "0000")),
+														new ParameterizedTypeReference<List<Customer>>() {}
+												  	 );
 		
-		return customers;
+		List<Customer> listCustomers = responseEntity.getBody();
+		
+		return listCustomers;
 	}
 
 	@Override
-	public Customer getCustomer(int id) {
-		
-		// make REST call
+	public Customer get(Integer id) {
 		ResponseEntity<Customer> responseEntity = restTemplate.exchange(
-																		url + "/" + id, 
-																		HttpMethod.GET,
-																		new HttpEntity<Customer>(createHeaders("user1", "0000")),
-																		Customer.class
-																		);
-		Customer customer = responseEntity.getBody();
+													url + "/" + id, 
+													HttpMethod.GET,
+													new HttpEntity<Customer>(createHeaders("user1", "0000")),
+													Customer.class
+												);
 		
-		return customer;
+		return responseEntity.getBody();
 	}
 
 	@Override
-	public void saveCustomer(Customer customer) {
+	public void save(Customer customer) {
+		boolean isNewMode = customer.getId() == 0;
 		
-		int id = customer.getId();
-		
-		// make REST call
-		if (id == 0) {
-			// add customer
+		if (isNewMode) {
 			restTemplate.exchange(url, HttpMethod.POST, new HttpEntity<Customer>(customer, createHeaders("user3", "0000")), Customer.class);
 		} else {
-			// update customer
 			restTemplate.exchange(url, HttpMethod.PUT, new HttpEntity<Customer>(customer, createHeaders("user3", "0000")), Customer.class);
 		}
-
 	}
 
 	@Override
-	public void deleteCustomer(int id) {
-		
-		// make REST call
+	public void delete(Integer id) {
 		restTemplate.exchange(url + "/" + id, HttpMethod.DELETE, new HttpEntity<>(createHeaders("user3", "0000")), Void.class);
 	}
 
