@@ -5,7 +5,7 @@
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css"
 	rel="stylesheet">
-<title>Customer Form</title>
+<title>Add Customer</title>
 </head>
 <body>
 
@@ -27,6 +27,7 @@
 	   	<input type="text" th:field="*{postalCode}" placeholder="Postal Code" class="form-control mb-4" maxlength="45" />
 	   	<input type="text" th:field="*{phoneNumber}" placeholder="Phone Number" class="form-control mb-4" required maxlength="15" />
 	   	
+	   	<a th:href="@{/customers/list}" class="btn btn-primary">Back</a>
 		<input type="submit" value="Save" class="btn btn-info" />
 	</form>
 </div>
