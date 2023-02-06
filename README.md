@@ -1,8 +1,8 @@
 # Spring Boot MVC CRUD APP
 
-This is a simple client app for api-1
+This is a simple client app for crm-api
 
-I used RestTemplate for make calls to the api-1
+I used RestTemplate for make calls to the crm-api
 
 Tehnologies used:
   Spring Boot,
